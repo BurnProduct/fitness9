@@ -10,105 +10,73 @@
   <!-- Fonte Lora -->
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   <style>
-    /* Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box }
     body {
-      font-family: 'Lora', serif;
-      background: #fff;
-      color: #000;
-      padding: 20px;
+      font-family:'Lora', serif;
+      background:#fff; color:#000;
+      padding:20px;
     }
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2em;
+      text-align:center;
+      margin-bottom:30px;
+      font-size:2em;
     }
-
-    /* Botão Sacola */
     #floatingSacola {
-      position: fixed;
-      top: 20px; right: 20px;
-      background: #007BFF; color: #fff;
-      border: none; border-radius: 8px;
-      padding: 10px 15px; font-size: 1em;
-      display: flex; align-items: center; gap: 8px;
-      cursor: pointer; z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      transition: background 0.3s;
+      position:fixed; top:20px; right:20px;
+      background:#007BFF; color:#fff;
+      border:none; border-radius:8px;
+      padding:10px 15px; font-size:1em;
+      display:flex; align-items:center; gap:8px;
+      cursor:pointer; z-index:1000;
+      box-shadow:0 2px 4px rgba(0,0,0,0.3);
+      transition:background 0.3s;
     }
-    #floatingSacola:hover { background: #0056b3; }
-
-    /* Seções */
-    .family-section { margin-bottom: 40px; }
+    #floatingSacola:hover { background:#0056b3 }
+    .family-section { margin-bottom:40px }
     .family-title {
-      font-size: 1.5em;
-      font-weight: bold;
-      margin-bottom: 15px;
+      font-size:1.5em; font-weight:bold;
+      margin-bottom:15px;
     }
     .family-content {
-      display: flex;
-      align-items: center;  /* desktop: imagem & tabela alinhadas verticalmente */
-      gap: 20px;
-      overflow-x: auto;
+      display:flex; align-items:center; gap:20px;
+      overflow-x:auto;
     }
     .family-image {
-      flex-shrink: 0;
-      width: 200px;
-      border-radius: 8px;
+      flex-shrink:0; width:200px; border-radius:8px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    table { width:100%; border-collapse:collapse }
     th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      padding:8px; text-align:left;
+      border-bottom:1px solid #ddd;
     }
-    input.product-qty,
-    input.product-unit-price {
-      width: 70px;
-      padding: 4px;
-      text-align: center;
+    input.product-qty {
+      width:60px; padding:4px; text-align:center;
     }
     button.add-to-cart {
-      background: #007BFF;
-      border: none;
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s;
+      background:#007BFF; border:none; color:#fff;
+      padding:6px 10px; border-radius:4px;
+      cursor:pointer; transition:background 0.3s;
     }
-    button.add-to-cart:hover { background: #0056b3; }
-
-    /* Ícone verde quando em carrinho */
+    button.add-to-cart:hover { background:#0056b3 }
     button.add-to-cart.in-cart i {
-      color: #28a745 !important;
+      color:#28a745 !important;
     }
-
-    /* Responsivo <=600px */
-    @media (max-width: 600px) {
+    @media(max-width:600px) {
       .family-content {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction:column; align-items:flex-start;
       }
-      .family-image {
-        width: 100%; max-width: 300px;
-      }
-      table { font-size: 0.9em; }
-      th, td { padding: 6px; }
-      input.product-qty,
-      input.product-unit-price { width: 60px; }
-      button.add-to-cart { padding: 5px 8px; }
+      .family-image { width:100%; max-width:300px }
+      table { font-size:0.9em }
+      th, td { padding:6px }
+      input.product-qty { width:50px }
+      button.add-to-cart { padding:5px 8px }
     }
-    @media (max-width: 480px) {
-      h1 { font-size: 1.5em; }
+    @media(max-width:480px) {
+      h1 { font-size:1.5em }
       #floatingSacola {
-        padding: 8px 12px;
-        font-size: 0.9em;
+        padding:8px 12px; font-size:0.9em;
       }
-      .family-title { font-size: 1.3em; }
+      .family-title { font-size:1.3em }
     }
   </style>
 </head>
@@ -122,124 +90,124 @@
   <div id="catalog"></div>
 
   <script>
-    // Cada produto com seu preço unitário inicial
+    // Dados internos de produto, preços fixos
     const families = [
       {
         title: 'ANILHA SPORT PINTADA',
         image: 'images/ANILHA_SPORT_PINTADA.jpg',
         products: [
-          { weight: 1, unitPrice: 10.00 },
-          { weight: 2, unitPrice: 12.00 },
-          { weight: 3, unitPrice: 14.00 },
-          { weight: 4, unitPrice: 16.00 },
-          { weight: 5, unitPrice: 18.00 },
-          { weight:10, unitPrice: 30.00 },
-          { weight:15, unitPrice: 45.00 },
-          { weight:20, unitPrice: 60.00 },
-          { weight:25, unitPrice: 75.00 }
+          { weight:1, price:10.00 },
+          { weight:2, price:12.00 },
+          { weight:3, price:14.00 },
+          { weight:4, price:16.00 },
+          { weight:5, price:18.00 },
+          { weight:10,price:30.00 },
+          { weight:15,price:45.00 },
+          { weight:20,price:60.00 },
+          { weight:25,price:75.00 }
         ]
       },
       {
         title: 'ANILHA SPORT EMBORRACHADA',
         image: 'images/ANILHA_SPORT_EMBORRACHADA.jpg',
         products: [
-          { weight: 1, unitPrice: 11.00 },
-          { weight: 2, unitPrice: 13.00 },
-          { weight: 3, unitPrice: 15.00 },
-          { weight: 4, unitPrice: 17.00 },
-          { weight: 5, unitPrice: 19.00 },
-          { weight:10, unitPrice: 32.00 },
-          { weight:15, unitPrice: 48.00 },
-          { weight:20, unitPrice: 64.00 },
-          { weight:25, unitPrice: 80.00 }
+          { weight:1, price:11.00 },
+          { weight:2, price:13.00 },
+          { weight:3, price:15.00 },
+          { weight:4, price:17.00 },
+          { weight:5, price:19.00 },
+          { weight:10,price:32.00 },
+          { weight:15,price:48.00 },
+          { weight:20,price:64.00 },
+          { weight:25,price:80.00 }
         ]
       },
       {
         title: 'ANILHA VAZADA EMBORRACHADA',
         image: 'images/ANILHA_VAZADA_EMBORRACHADA.jpg',
         products: [
-          { weight: 1, unitPrice: 12.00 },
-          { weight: 2, unitPrice: 14.00 },
-          { weight: 3, unitPrice: 16.00 },
-          { weight: 4, unitPrice: 18.00 },
-          { weight: 5, unitPrice: 20.00 },
-          { weight:10, unitPrice: 34.00 },
-          { weight:15, unitPrice: 51.00 },
-          { weight:20, unitPrice: 68.00 },
-          { weight:25, unitPrice: 85.00 }
+          { weight:1, price:12.00 },
+          { weight:2, price:14.00 },
+          { weight:3, price:16.00 },
+          { weight:4, price:18.00 },
+          { weight:5, price:20.00 },
+          { weight:10,price:34.00 },
+          { weight:15,price:51.00 },
+          { weight:20,price:68.00 },
+          { weight:25,price:85.00 }
         ]
       },
       {
         title: 'ANILHA VAZADA PINTADA',
         image: 'images/ANILHA_VAZADA_PINTADA.jpg',
         products: [
-          { weight: 1, unitPrice: 10.50 },
-          { weight: 2, unitPrice: 12.50 },
-          { weight: 3, unitPrice: 14.50 },
-          { weight: 4, unitPrice: 16.50 },
-          { weight: 5, unitPrice: 18.50 },
-          { weight:10, unitPrice: 31.00 },
-          { weight:15, unitPrice: 46.00 },
-          { weight:20, unitPrice: 62.00 },
-          { weight:25, unitPrice: 77.00 }
+          { weight:1, price:10.50 },
+          { weight:2, price:12.50 },
+          { weight:3, price:14.50 },
+          { weight:4, price:16.50 },
+          { weight:5, price:18.50 },
+          { weight:10,price:31.00 },
+          { weight:15,price:46.00 },
+          { weight:20,price:62.00 },
+          { weight:25,price:77.00 }
         ]
       },
       {
         title: 'KETTLEBELL PINTADO',
         image: 'images/KETTLEBELL_PINTADO.jpg',
         products: [
-          { weight: 4, unitPrice: 20.00 },
-          { weight: 6, unitPrice: 30.00 },
-          { weight: 8, unitPrice: 40.00 },
-          { weight:10, unitPrice: 50.00 },
-          { weight:12, unitPrice: 60.00 },
-          { weight:14, unitPrice: 70.00 },
-          { weight:16, unitPrice: 80.00 },
-          { weight:18, unitPrice: 90.00 },
-          { weight:20, unitPrice:100.00 },
-          { weight:22, unitPrice:110.00 },
-          { weight:24, unitPrice:120.00 }
+          { weight:4, price:20.00 },
+          { weight:6, price:30.00 },
+          { weight:8, price:40.00 },
+          { weight:10,price:50.00 },
+          { weight:12,price:60.00 },
+          { weight:14,price:70.00 },
+          { weight:16,price:80.00 },
+          { weight:18,price:90.00 },
+          { weight:20,price:100.00 },
+          { weight:22,price:110.00 },
+          { weight:24,price:120.00 }
         ]
       },
       {
         title: 'KETTLEBELL EMBORRACHADO',
         image: 'images/KETTLEBELL_EMBORRACHADO.jpg',
         products: [
-          { weight: 4, unitPrice: 22.00 },
-          { weight: 6, unitPrice: 33.00 },
-          { weight: 8, unitPrice: 44.00 },
-          { weight:10, unitPrice: 55.00 },
-          { weight:12, unitPrice: 66.00 },
-          { weight:14, unitPrice: 77.00 },
-          { weight:16, unitPrice: 88.00 },
-          { weight:18, unitPrice: 99.00 },
-          { weight:20, unitPrice:110.00 },
-          { weight:22, unitPrice:121.00 },
-          { weight:24, unitPrice:132.00 }
+          { weight:4, price:22.00 },
+          { weight:6, price:33.00 },
+          { weight:8, price:44.00 },
+          { weight:10,price:55.00 },
+          { weight:12,price:66.00 },
+          { weight:14,price:77.00 },
+          { weight:16,price:88.00 },
+          { weight:18,price:99.00 },
+          { weight:20,price:110.00 },
+          { weight:22,price:121.00 },
+          { weight:24,price:132.00 }
         ]
       },
       {
         title: 'KETTLEBELL EMBORRACHADO PEGADA PINTADA',
         image: 'images/KETTLEBELL_EMBORRACHADO_PINTADA.jpg',
         products: [
-          { weight: 4, unitPrice: 24.00 },
-          { weight: 6, unitPrice: 36.00 },
-          { weight: 8, unitPrice: 48.00 },
-          { weight:10, unitPrice: 60.00 },
-          { weight:12, unitPrice: 72.00 },
-          { weight:14, unitPrice: 84.00 },
-          { weight:16, unitPrice: 96.00 },
-          { weight:18, unitPrice:108.00 },
-          { weight:20, unitPrice:120.00 },
-          { weight:22, unitPrice:132.00 },
-          { weight:24, unitPrice:144.00 }
+          { weight:4, price:24.00 },
+          { weight:6, price:36.00 },
+          { weight:8, price:48.00 },
+          { weight:10,price:60.00 },
+          { weight:12,price:72.00 },
+          { weight:14,price:84.00 },
+          { weight:16,price:96.00 },
+          { weight:18,price:108.00 },
+          { weight:20,price:120.00 },
+          { weight:22,price:132.00 },
+          { weight:24,price:144.00 }
         ]
       },
       {
         title: 'TIJOLINHO 5KG',
         image: 'images/TIJOLINHO_5KG.jpg',
         products: [
-          { weight: 5, unitPrice: 8.00 }
+          { weight:5, price:8.00 }
         ]
       }
     ];
@@ -247,9 +215,9 @@
     const catalog = document.getElementById('catalog');
 
     families.forEach(fam => {
-      const sec = document.createElement('div');
-      sec.className = 'family-section';
-      sec.innerHTML = `
+      const section = document.createElement('div');
+      section.className = 'family-section';
+      section.innerHTML = `
         <div class="family-title">${fam.title}</div>
         <div class="family-content">
           <img src="${fam.image}" alt="${fam.title}" class="family-image">
@@ -257,7 +225,7 @@
             <thead>
               <tr>
                 <th>Produto</th>
-                <th>Preço Unit. (R$)</th>
+                <th>Preço Unitário (R$)</th>
                 <th>Qtd.</th>
                 <th></th>
               </tr>
@@ -266,15 +234,7 @@
               ${fam.products.map(p => `
                 <tr>
                   <td>${fam.title} ${p.weight} KG</td>
-                  <td>
-                    <input
-                      type="number"
-                      class="product-unit-price"
-                      min="0"
-                      step="0.01"
-                      value="${p.unitPrice.toFixed(2)}"
-                    >
-                  </td>
+                  <td>R$ ${p.price.toFixed(2)}</td>
                   <td>
                     <input
                       type="number"
@@ -284,8 +244,10 @@
                     >
                   </td>
                   <td>
-                    <button class="add-to-cart"
-                            onclick="toggleCart(this,'${fam.title} ${p.weight} KG')">
+                    <button
+                      class="add-to-cart"
+                      onclick="toggleCart(this,'${fam.title} ${p.weight} KG',${p.price.toFixed(2)})"
+                    >
                       <i class="fas fa-shopping-bag"></i>
                     </button>
                   </td>
@@ -294,24 +256,19 @@
             </tbody>
           </table>
         </div>`;
-      catalog.appendChild(sec);
+      catalog.appendChild(section);
     });
 
-    function toggleCart(btn, productName) {
+    function toggleCart(btn, productName, unitPrice) {
       const row = btn.closest('tr');
       const qty = parseInt(row.querySelector('.product-qty').value) || 0;
       if (qty <= 0) {
         alert('Selecione uma quantidade válida.');
         return;
       }
-      const unitPrice = parseFloat(row.querySelector('.product-unit-price').value) || 0;
-      if (unitPrice <= 0) {
-        alert('Defina um preço unitário válido.');
-        return;
-      }
-      const total = unitPrice * qty;
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const idx = cart.findIndex(i => i.name === productName);
+      const total = unitPrice * qty;
       if (idx > -1) {
         cart[idx].qty += qty;
         cart[idx].total += total;
@@ -325,7 +282,7 @@
       }
       localStorage.setItem('cart', JSON.stringify(cart));
       btn.classList.add('in-cart');
-      alert(`Adicionado ${qty}× ${productName} ao carrinho (R$${total.toFixed(2)}).`);
+      alert(`Adicionado ${qty}×${productName} ao carrinho (R$${total.toFixed(2)}).`);
     }
   </script>
 </body>
